@@ -1,0 +1,15 @@
+[paths]
+source =
+    fastapi_batteries_included/*
+
+[report]
+exclude_lines =
+  app.config
+
+omit =
+  */__main__.py
+
+fail_under = 90
+
+show_missing = true
+skip_covered = true

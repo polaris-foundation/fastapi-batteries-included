@@ -1,0 +1,88 @@
+[tool.poetry]
+name = "fastapi-batteries-included"
+version = "1.2.3"
+description = "Sensyne Health : FastAPI Batteries Included"
+authors = ["Duncan Booth <duncan.booth@sensynehealth.com>"]
+keywords = ["FastAPI"]
+repository = "https://github.com/sensynehealth/fastapi-batteries-included"
+include = ["fastapi_batteries_included/py.typed"]
+
+[[tool.poetry.source]]
+name = "sensynehealth"
+url = "https://pypi.fury.io/sensynehealth/"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+aiofile = "3.*"
+fastapi = "0.*"
+prometheus-client = "0.*"
+prometheus-fastapi-instrumentator = "5.*"
+she-logging = "1.*"
+typer = "0.*"
+
+python-jose = { version="3.*", optional = true }
+psycopg2-binary = { version = "2.*", optional = true }
+SQLAlchemy = { version="1.4.*", optional = true, extras=["mypy"] }
+FastAPI-SQLAlchemy = { version="0.*", optional=true }
+alembic = { version="1.*", optional=true }
+pyodbc = { version="4.*", optional=true }
+cachetools = "^4.2.2"
+
+[tool.poetry.dev-dependencies]
+bandit = "*"
+black = "*"
+coloredlogs = "*"
+coverage = "*"
+isort = "*"
+mypy = "*"
+pytest = "*"
+pytest-dhos = "*"
+pytest-mock = "*"
+safety = "*"
+tox = "*"
+pytest-asyncio = "*"
+httpx = "*"
+pytest-httpx = "*"
+types-PyYAML = "*"
+pytest-freezegun = "*"
+types-freezegun = "*"
+types-requests = "*"
+types-cachetools = "*"
+
+[tool.mypy]
+namespace_packages=true
+ignore_missing_imports=false
+disallow_untyped_defs=true
+plugins="sqlalchemy.ext.mypy.plugin"
+
+[[tool.mypy.overrides]]
+module = ["prometheus_client",
+    "prometheus_fastapi_instrumentator",
+    "psycopg2",
+    "aiofile",
+    "jose",
+]
+ignore_missing_imports = true
+
+[tool.poetry.extras]
+mssql = ["SQLAlchemy", "pyodbc", "FastAPI-SQLAlchemy", "alembic"]
+pgsql = ["SQLAlchemy", "psycopg2-binary", "FastAPI-SQLAlchemy", "alembic"]
+jwt = ["python-jose"]
+
+[tool.poetry.scripts]
+create-openapi = 'fastapi_batteries_included.helpers.apispec:create_openapi'
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:jose",
+    "ignore::DeprecationWarning:jinja2",
+    "ignore::DeprecationWarning:marshmallow.fields"
+    ]
+
+[tool.isort]
+profile = "black"
+known_third_party = ["_pytest", "aiofile", "cachetools", "fastapi", "fastapi_sqlalchemy", "freezegun", "httpx", "jose", "prometheus_client", "prometheus_fastapi_instrumentator", "pydantic", "pytest", "pytest_asyncio", "pytest_httpx", "pytest_mock", "she_logging", "sqlalchemy", "starlette", "toml", "typer", "yaml"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
