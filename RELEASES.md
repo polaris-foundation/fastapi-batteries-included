@@ -1,3 +1,6 @@
+# 1.2.4
+- Move hosting to public pypi
+
 # 1.2.3
 - `deprecated_route` dependency to set response headers on deprecated endpoints
 

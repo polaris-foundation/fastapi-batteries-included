@@ -1,15 +1,11 @@
 [tool.poetry]
 name = "fastapi-batteries-included"
-version = "1.2.3"
-description = "Sensyne Health : FastAPI Batteries Included"
+version = "1.2.4"
+description = "Batteries-included library for services that use FastAPI"
 authors = ["Duncan Booth <duncan.booth@sensynehealth.com>"]
 keywords = ["FastAPI"]
-repository = "https://github.com/sensynehealth/fastapi-batteries-included"
+repository = "https://github.com/polaris-foundation/fastapi-batteries-included"
 include = ["fastapi_batteries_included/py.typed"]
-
-[[tool.poetry.source]]
-name = "sensynehealth"
-url = "https://pypi.fury.io/sensynehealth/"
 
 [tool.poetry.dependencies]
 python = "^3.9"
